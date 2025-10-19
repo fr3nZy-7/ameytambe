@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amey A. Tambe - Product & QA Leader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-min-height {
+            min-height: 100vh;
+        }
+        
+        /* Starfield Animation */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .meteor {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px #00ff88;
+            animation: meteor 2s linear;
+        }
+        
+        @keyframes meteor {
+            0% {
+                transform: translate(0, 0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-300px, 300px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+        .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3f3f46;
+        }
+        .timeline-node {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #18181b;
+            border: 3px solid #3f3f46;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .timeline-node.active {
+            border-color: #00ff88;
+            background: #00ff88;
+            box-shadow: 0 0 20px #00ff88;
+        }
+        .timeline-node:hover {
+            transform: scale(1.1);
+            border-color: #00ff88;
+            box-shadow: 0 0 15px #00ff88;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 48px;
+            padding-bottom: 32px;
+        }
+        .card {
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 255, 136, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .card:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            border-color: #00ff88;
+        }
+        .nav-link {
+            padding: 12px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #a1a1aa;
+        }
+        .nav-link:hover {
+            background: #27272a;
+            color: #00ff88;
+        }
+        .nav-link.active {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border-left: 3px solid #00ff88;
+        }
+        .skill-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 4px;
+            background: #27272a;
+            color: #d4d4d8;
+            border: 1px solid #3f3f46;
+        }
+        .skill-tag.highlight {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+        .hamburger {
+            display: none;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        
+        .btn-neon {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 1000;
+                transition: transform 0.3s ease;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .hamburger {
+                display: block;
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+            .overlay.show {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100">
+    <canvas id="starfield"></canvas>
+    
+    <button class="hamburger fixed top-4 left-4 z-50 bg-zinc-900 p-3 rounded-lg shadow-md border border-zinc-700 hover:border-[#00ff88]">
+        <svg class="w-6 h-6 text-[#00ff88]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <div class="overlay"></div>
+
+    <aside class="sidebar fixed left-0 top-0 h-screen w-64 bg-zinc-900 border-r border-zinc-800 flex flex-col z-10">
+        <div class="p-6 border-b border-zinc-800">
+            <h1 class="text-xl font-bold text-[#00ff88] glow-text">Amey A. Tambe</h1>
+            <p class="text-sm text-gray-400 mt-1">The Moto Monk</p>
+        </div>
+
+        <nav class="flex-1 p-4">
+            <a href="#hero" class="nav-link block active" data-section="hero">Home</a>
+            <a href="#journey" class="nav-link block" data-section="journey">Career Journey</a>
+            <a href="#expertise" class="nav-link block" data-section="expertise">Core Expertise</a>
+            <a href="#certifications" class="nav-link block" data-section="certifications">Certifications</a>
+            <a href="#about" class="nav-link block" data-section="about">About</a>
+        </nav>
+
+        <div class="p-6 border-t border-zinc-800">
+            <a href="mailto:amey_iaf@yahoo.co.in" class="text-sm text-gray-400 hover:text-[#00ff88]">amey_iaf@yahoo.co.in</a>
+        </div>
+    </aside>
+
+    <main class="lg:ml-64">
+        <section id="hero" class="section-min-height flex items-center justify-center px-6 relative z-1">
+            <div class="max-w-3xl text-center">
+                <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 glow-text">Amey A. Tambe</h2>
+                <p class="text-xl md:text-2xl text-[#00ff88] mb-6">Product & QA Leader | Web3 Specialist | System Architect</p>
+                <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                    A forward-thinking leader with over 13 years of experience building robust software, architecting elegant QA systems, and guiding products from concept to launch. I find insights hidden in plain sight, believing simplicity is the ultimate sophistication.
+                </p>
+                <div class="flex gap-4 justify-center">
+                    <a href="https://www.linkedin.com/in/the-moto-monk-ey/" target="_blank" class="bg-[#00ff88] text-black px-6 py-3 rounded-lg font-semibold btn-neon inline-flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/fr3nZy-7" target="_blank" class="bg-zinc-800 text-[#00ff88] border-2 border-[#00ff88] px-6 py-3 rounded-lg font-semibold btn-neon inline-flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="section-min-height px-6 py-20">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-4xl font-bold text-white mb-4">Career Journey</h3>
+                <p class="text-gray-400 mb-12">Click any role to see details. This timeline shows 13+ years of progression from engineer to product leader.</p>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="relative">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-item" data-job="0">
+                            <div class="timeline-node"></div>
+                            <div>
+                                <h4 class="font-bold text-white">Product Lead</h4>
+                                <p class="text-sm text-gray-400">Aqilliz Pte Ltd</p>
+                                <p class="text-xs text-gray-500 mt-1">Apr 2024 - Present</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-job="1">
+                            <div class="timeline-node"></div>
+                            <div>
+                                <h4 class="font-bold text-white">Lead Test Engineer</h4>
+                                <p class="text-sm text-gray-400">TreasurePACK DMCC</p>
+                                <p class="text-xs text-gray-500 mt-1">Apr 2023 - Mar 2024</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-job="2">
+                            <div class="timeline-node"></div>
+                            <div>
+                                <h4 class="font-bold text-white">Lead Test Engineer</h4>
+                                <p class="text-sm text-gray-400">KoineArth India Pvt Ltd</p>
+                                <p class="text-xs text-gray-500 mt-1">Dec 2021 - Mar 2023</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-job="3">
+                            <div class="timeline-node"></div>
+                            <div>
+                                <h4 class="font-bold text-white">Senior Project Engineer</h4>
+                                <p class="text-sm text-gray-400">Wipro Ltd</p>
+                                <p class="text-xs text-gray-500 mt-1">Dec 2015 - Dec 2021</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-job="4">
+                            <div class="timeline-node"></div>
+                            <div>
+                                <h4 class="font-bold text-white">Project Engineer</h4>
+                                <p class="text-sm text-gray-400">Wipro Ltd</p>
+                                <p class="text-xs text-gray-500 mt-1">Aug 2011 - Dec 2015</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:sticky lg:top-20 h-fit">
+                        <div class="card" id="job-details">
+                            <h4 class="font-bold text-xl text-white mb-4" id="job-title">Select a role to view details</h4>
+                            <p class="text-sm text-gray-400 mb-4" id="job-company"></p>
+                            <ul class="space-y-2" id="job-responsibilities"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise" class="section-min-height px-6 py-20 bg-zinc-900">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-4xl font-bold text-white mb-4">Core Expertise</h3>
+                <p class="text-gray-400 mb-12">This dashboard provides a quantitative and qualitative view of my technical capabilities.</p>
+
+                <div class="mb-12">
+                    <canvas id="experienceChart" style="max-height: 400px;"></canvas>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h4 class="font-bold text-lg text-white mb-4">Testing & QA</h4>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag highlight">Web3 Testing</span>
+                            <span class="skill-tag highlight">Blockchain</span>
+                            <span class="skill-tag highlight">Smart Contracts</span>
+                            <span class="skill-tag">Automation (UFT, Selenium)</span>
+                            <span class="skill-tag">API Testing</span>
+                            <span class="skill-tag">Stress Testing (JMeter, k6)</span>
+                            <span class="skill-tag">QA Audits</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-lg text-white mb-4">Product Management</h4>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag highlight">PSPO-I Certified</span>
+                            <span class="skill-tag">Backlog Management</span>
+                            <span class="skill-tag">Release Processes</span>
+                            <span class="skill-tag">GTM Strategy</span>
+                            <span class="skill-tag">Client Demos</span>
+                            <span class="skill-tag">Product Guides</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-lg text-white mb-4">Tools & Technologies</h4>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag">Selenium WebDriver</span>
+                            <span class="skill-tag">UFT</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">JMeter</span>
+                            <span class="skill-tag">k6</span>
+                            <span class="skill-tag highlight">Hyperledger Fabric</span>
+                            <span class="skill-tag highlight">Polygon Matic</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-lg text-white mb-4">Leadership & Systems</h4>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag highlight">Team Management</span>
+                            <span class="skill-tag">Information Security</span>
+                            <span class="skill-tag">System Architecture</span>
+                            <span class="skill-tag">Process Building</span>
+                            <span class="skill-tag">Business-Tech Interface</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section-min-height px-6 py-20">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-4xl font-bold text-white mb-4">Certifications</h3>
+                <p class="text-gray-400 mb-12">Industry-recognized certifications validating expertise in Scrum, Blockchain, Leadership, and Automation.</p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">Professional Scrum Product Owner (PSPO-I)</h4>
+                        <p class="text-sm text-gray-400">Scrum.org</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">Professional Certificate in Blockchain</h4>
+                        <p class="text-sm text-gray-400">IIT Kanpur</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">The Science of Leadership</h4>
+                        <p class="text-sm text-gray-400">Udemy</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">RPA Specialist</h4>
+                        <p class="text-sm text-gray-400">Tricentis</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">Automation Specialist Level 2</h4>
+                        <p class="text-sm text-gray-400">Tricentis Tosca 12.x</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="font-bold text-white mb-2">Automation Specialist Level 1</h4>
+                        <p class="text-sm text-gray-400">Tricentis Tosca 12.x</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-min-height px-6 py-20 bg-zinc-900">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-4xl font-bold text-white mb-12">About</h3>
+                <p class="text-gray-400 mb-12">Understanding the person behind the professional - my philosophy bridges technical precision with purpose-driven execution.</p>
+
+                <div class="grid lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3">
+                        <div class="card">
+                            <h4 class="font-bold text-2xl text-white mb-6">The Architect & The Monk-ey</h4>
+
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                As an INTJ-A personality, I approach challenges with analytical precision and ethical balance. I believe in building systems that are both elegant and efficient, where simplicity emerges from deep understanding rather than superficial shortcuts.
+                            </p>
+
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                My leadership philosophy centers on empowering teams to discover insights hidden in plain sight. I've built QA processes that reduced project overheads, architected Web3 testing frameworks for blockchain applications, and bridged the gap between business vision and technical execution.
+                            </p>
+
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Currently expanding my technical repertoire by learning React, Next.js, and modern JavaScript. I recently built <a href="https://padmanaabhdental.clinic" target="_blank" class="text-[#00ff88] hover:underline">padmanaabhdental.clinic</a> using AI tools, demonstrating my commitment to understanding the full spectrum of web development, and prompt engineering capabilities.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <div class="card">
+                            <h4 class="font-bold text-xl text-white mb-6">Beyond the Code</h4>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl">🏍️</div>
+                                    <div>
+                                        <p class="font-medium text-white">Avid Motorcyclist</p>
+                                        <p class="text-sm text-gray-400">150,000+ km experience with multiple cross-country tours</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl">⚽</div>
+                                    <div>
+                                        <p class="font-medium text-white">Former Athlete</p>
+                                        <p class="text-sm text-gray-400">Represented company, school, and college in football competitions</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl">📚</div>
+                                    <div>
+                                        <p class="font-medium text-white">Continuous Learner</p>
+                                        <p class="text-sm text-gray-400">Reading, gaming, PC assembly, and motorcycle maintenance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="px-6 py-8 bg-zinc-900 border-t border-zinc-800 text-gray-400 text-center">
+            <p>&copy; 2024 Amey A. Tambe. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Job Details Data
+        const jobDetails = [
+            {
+                title: "Product Lead",
+                company: "Aqilliz Pte Ltd (Apr 2024 - Present)",
+                responsibilities: [
+                    "Leading product strategy and development for Web3 advertising solutions",
+                    "Managing tech team and establishing release processes",
+                    "Working on GTM strategy and Google Marketplace integration",
+                    "Maintaining product backlog and interfacing between business and tech teams",
+                    "Collaborating with sales team for client demos and product documentation",
+                    "Working directly with clients on use cases and campaigns"
+                ]
+            },
+            {
+                title: "Lead Test Engineer",
+                company: "TreasurePACK DMCC (Apr 2023 - Mar 2024)",
+                responsibilities: [
+                    "Managed the tech team and set up release processes, test plans, and strategies",
+                    "Worked on GTM strategy and product listing on Google Marketplace",
+                    "Maintained product backlog and prioritized development efforts",
+                    "Served as interface between business and tech teams",
+                    "Collaborated with sales team for client demos and product guides",
+                    "Worked directly with clients on their use cases and campaigns"
+                ]
+            },
+            {
+                title: "Lead Test Engineer",
+                company: "KoineArth India Pvt Ltd (Dec 2021 - Mar 2023)",
+                responsibilities: [
+                    "Managed QA team and established QA processes, test plans, and strategies",
+                    "Reported directly to Chief Product Officer, gained product management exposure",
+                    "Built release processes that reduced project overheads significantly",
+                    "Tested NFT marketplace on Polygon Matic blockchain and Hyperledger Fabric supply chain apps",
+                    "Specialized in Web3 testing, blockchain, and smart contracts testing",
+                    "Created automation framework using Selenium WebDriver",
+                    "Performed stress testing using JMeter and k6",
+                    "Collaborated with sales for client demos and product documentation"
+                ]
+            },
+            {
+                title: "Senior Project Engineer",
+                company: "Wipro Ltd (Dec 2015 - Dec 2021)",
+                responsibilities: [
+                    "Analyzed business requirements and clarified technical issues",
+                    "Conducted manual and regression testing for investment banking applications",
+                    "Created functional flows and test plans for unit testing and SIT",
+                    "Performed comprehensive data validation across applications after releases",
+                    "Assisted team lead in test plan preparation, traceability matrix, and estimations",
+                    "Part of functional automation team writing test scripts from functional test phase",
+                    "Involved in multiple POCs for new automation tools (Tosca and Katalon)"
+                ]
+            },
+            {
+                title: "Project Engineer",
+                company: "Wipro Ltd (Aug 2011 - Dec 2015)",
+                responsibilities: [
+                    "Software test engineer (May 2013 - Dec 2015): Analyzed business requirements, conducted manual and regression testing, created functional flows and test plans",
+                    "Performed comprehensive data validation activities across applications",
+                    "Network support engineer (Nov 2011 - May 2013): Performed carriage testing, network assurance, and vulnerability assessment",
+                    "Ensured end-to-end connectivity of services",
+                    "Gained exposure to information security and system hardening"
+                ]
+            }
+        ];
+
+        let currentJob = -1;
+
+        function showJobDetails(index) {
+            if (index === currentJob) return;
+
+            currentJob = index;
+            const job = jobDetails[index];
+
+            document.querySelectorAll('.timeline-node').forEach((node, i) => {
+                if (i === index) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            });
+
+            const title = document.getElementById('job-title');
+            const company = document.getElementById('job-company');
+            const responsibilities = document.getElementById('job-responsibilities');
+
+            title.textContent = job.title;
+            company.textContent = job.company;
+
+            responsibilities.innerHTML = job.responsibilities
+                .map(resp => `<li class="text-gray-300 pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-[#00ff88]">${resp}</li>`)
+                .join('');
+        }
+
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.addEventListener('click', () => showJobDetails(index));
+        });
+
+        showJobDetails(0);
+
+        // Experience Chart
+        const ctx = document.getElementById('experienceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Testing & QA', 'Product Management', 'Web3 & Blockchain', 'Automation', 'Info Security', 'Team Leadership'],
+                datasets: [{
+                    label: 'Years of Experience',
+                    data: [13, 3.5, 3, 10, 4, 5],
+                    backgroundColor: '#00ff88',
+                    borderColor: '#00ff88',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.x + ' years';
+                            }
+                        },
+                        backgroundColor: '#18181b',
+                        titleColor: '#00ff88',
+                        bodyColor: '#d4d4d8',
+                        borderColor: '#3f3f46',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 15,
+                        grid: {
+                            color: '#3f3f46'
+                        },
+                        ticks: {
+                            color: '#a1a1aa'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#d4d4d8',
+                            font: {
+                                size: 14,
+                                weight: 500
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+
+                if (window.innerWidth <= 1024) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('show');
+                }
+            });
+        });
+
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.overlay');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+
+        updateActiveNav();
+
+        // Starfield Animation
+        const canvas = document.getElementById('starfield');
+        const starCtx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Create stars
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                opacity: Math.random(),
+                twinkleSpeed: Math.random() * 0.02 + 0.01
+            });
+        }
+        
+        // Create meteor
+        function createMeteor() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height * 0.3,
+                length: Math.random() * 80 + 40,
+                speed: Math.random() * 10 + 5,
+                opacity: 1
+            };
+        }
+        
+        let meteors = [];
+        
+        function animate() {
+            starCtx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw stars
+            stars.forEach(star => {
+                starCtx.beginPath();
+                starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                starCtx.fillStyle = `rgba(0, 255, 136, ${star.opacity})`;
+                starCtx.fill();
+                
+                star.opacity += star.twinkleSpeed;
+                if (star.opacity > 1 || star.opacity < 0.3) {
+                    star.twinkleSpeed *= -1;
+                }
+            });
+            
+            // Draw meteors
+            meteors.forEach((meteor, index) => {
+                starCtx.beginPath();
+                starCtx.moveTo(meteor.x, meteor.y);
+                starCtx.lineTo(meteor.x - meteor.length, meteor.y + meteor.length);
+                starCtx.strokeStyle = `rgba(0, 255, 136, ${meteor.opacity})`;
+                starCtx.lineWidth = 2;
+                starCtx.stroke();
+                
+                meteor.x -= meteor.speed;
+                meteor.y += meteor.speed;
+                meteor.opacity -= 0.01;
+                
+                if (meteor.opacity <= 0) {
+                    meteors.splice(index, 1);
+                }
+            });
+            
+            // Randomly create meteors
+            if (Math.random() < 0.01 && meteors.length < 3) {
+                meteors.push(createMeteor());
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    </script>

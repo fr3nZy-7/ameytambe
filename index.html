@@ -28,7 +28,6 @@
             color: #d4d4d8;
         }
 
-        /* Starfield Animation */
         #starfield {
             position: fixed;
             top: 0;
@@ -39,7 +38,6 @@
             pointer-events: none;
         }
         
-        /* Loading animation */
         .loader-overlay {
             position: fixed;
             top: 0;
@@ -73,7 +71,6 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Navigation */
         .nav-link {
             transition: all 0.2s ease-in-out;
         }
@@ -83,7 +80,6 @@
             border-right: 3px solid #00ff88;
         }
         
-        /* Profile image */
         .profile-image {
             width: 80px;
             height: 80px;
@@ -93,12 +89,11 @@
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
-        /* Timeline */
         .timeline-item::before {
             content: '';
             position: absolute;
             left: -31px;
-            top: 50%;
+            top: 1.25rem; /* adjusted for alignment */
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
@@ -126,8 +121,20 @@
             width: 2px;
             background-color: #3f3f46;
         }
+
+        .mobile-details-container {
+            transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        .mobile-details-container.open {
+            max-height: 1000px; /* Large enough to not clip content */
+            opacity: 1;
+            margin-top: 1.5rem; /* 24px */
+        }
         
-        /* Chart container */
         .chart-container {
             position: relative;
             width: 100%;
@@ -142,7 +149,6 @@
             }
         }
         
-        /* Stat counter animation */
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
@@ -150,7 +156,6 @@
             text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
         
-        /* CTA buttons */
         .cta-primary {
             background: #00ff88;
             color: #000;
@@ -162,7 +167,6 @@
             box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
         }
         
-        /* Skill tags enhanced */
         .skill-tag {
             background: #27272a;
             color: #d4d4d8;
@@ -175,7 +179,6 @@
             color: #00ff88;
         }
         
-        /* Certification cards */
         .cert-card {
             background: #18181b;
             border: 1px solid #3f3f46;
@@ -187,7 +190,6 @@
             box-shadow: 0 12px 24px rgba(0, 255, 136, 0.1);
         }
         
-        /* Sticky CTA footer */
         .sticky-cta {
             position: fixed;
             bottom: 0;
@@ -218,7 +220,6 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- Loading Overlay -->
     <div class="loader-overlay" id="loader">
         <div class="loader"></div>
     </div>
@@ -226,7 +227,6 @@
     <canvas id="starfield"></canvas>
 
     <div class="flex min-h-screen">
-        <!-- Sidebar Navigation -->
         <nav id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-zinc-800 pt-6 hidden lg:block z-40">
             <div class="px-6 mb-8 text-center">
                 <img src="/assets/images/profile.jpg" alt="Amey A. Tambe" class="profile-image w-48 h-48 mx-auto mb-3">
@@ -242,40 +242,36 @@
             </ul>
             <div class="absolute bottom-10 left-0 w-full px-6">
                  <a href="tel:+917507200775" class="text-sm text-gray-500 hover:text-[#00ff88] block mb-2">+(91) 7507 200 775</a>
-                <a href="mailto:amey.iaf@yahoo.co.in" class="text-sm text-gray-500 hover:text-[#00ff88] block mb-2">amey.iaf@yahoo.co.in</a>
+                <a href="mailto:amey_iaf@yahoo.co.in" class="text-sm text-gray-500 hover:text-[#00ff88] block mb-2">amey_iaf@yahoo.co.in</a>
                 <a href="/assets/resume/Amey A Tambe - 13 Yrs - Product Lead, Test Lead, Scrum Master.pdf" download class="text-sm text-[#00ff88] hover:text-green-300 font-medium">↓ Download Resume</a>
             </div>
         </nav>
 
-        <!-- Main Content -->
         <main class="w-full lg:ml-64 p-6 sm:p-8 md:p-12">
-            <!-- Hero Section -->
             <section id="home" class="min-h-screen flex items-center justify-center relative">
                 <div class="text-center max-w-4xl relative z-10">
                     <img src="/assets/images/profile.jpg" alt="Amey A. Tambe" class="profile-image mx-auto mb-6 lg:hidden">
                     <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-4 glow-text">Amey A. Tambe</h1>
-                    <p class="text-xl md:text-2xl text-[#00ff88] font-semibold mb-3">Product & QA Leader | AI Generalist | Web3 Specialist | System Architect</p>
+                    <p class="text-xl md:text-2xl text-[#00ff88] font-semibold mb-3">Product & QA Leader | AI Generalist | Web3 Specialist | Product Design</p>
                     <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
-                        A forward-thinking leader with <span class="font-bold text-[#00ff88]">13+ years</span> of experience building robust software, architecting elegant QA systems, and guiding products from concept to launch.
+                        A forward-thinking leader with <span class="font-bold text-[#00ff88]">14+ years</span> of experience building robust software, architecting elegant QA systems, and guiding products from concept to launch.
                     </p>
                     
-                    <!-- Key Stats -->
                     <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
                         <div>
-                            <div class="stat-number" data-target="13">0</div>
+                            <div class="stat-number" data-target="14">0</div>
                             <div class="text-sm text-gray-400 font-medium">Years Experience</div>
                         </div>
                         <div>
-                            <div class="stat-number" data-target="20">0</div>
+                            <div class="stat-number" data-target="25">0</div>
                             <div class="text-sm text-gray-400 font-medium">Projects Delivered</div>
                         </div>
                         <div>
-                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-number" data-target="7">0</div>
                             <div class="text-sm text-gray-400 font-medium">Teams Led</div>
                         </div>
                     </div>
                     
-                    <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                         <a href="/assets/resume/Amey A Tambe - 13 Yrs - Product Lead, Test Lead, Scrum Master.pdf" download class="cta-primary font-bold py-4 px-8 rounded-lg shadow-lg inline-flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,7 +287,6 @@
                         </a>
                     </div>
                     
-                    <!-- Social Links -->
                     <div class="flex justify-center space-x-6">
                         <a href="https://www.linkedin.com/in/the-moto-monk-ey/" target="_blank" class="text-gray-500 hover:text-[#00ff88] transition-colors">
                             <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -303,35 +298,29 @@
                 </div>
             </section>
 
-            <!-- Career Journey Section -->
             <section id="journey" class="min-h-screen py-20">
                 <h2 class="text-4xl font-bold text-white mb-4">Career Journey</h2>
-                <p class="text-lg text-gray-400 mb-12 max-w-3xl">Click any role to see details. This timeline shows 13+ years of progression from engineer to product leader.</p>
+                <p class="text-lg text-gray-400 mb-12 max-w-3xl">Click any role to see details. This timeline shows 14+ years of progression from engineer to product leader.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div class="relative pl-8">
                         <div class="timeline-connector"></div>
                         <div id="timeline-container"></div>
                     </div>
-                    <div id="journey-details" class="bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg sticky top-20 h-fit">
-                        <p class="text-gray-500 text-center">Loading details...</p>
+                    <div id="journey-details-desktop" class="bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg sticky top-20 h-fit hidden md:block">
+                        <p class="text-gray-500 text-center">Select a role to view details</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Core Expertise Section -->
             <section id="expertise" class="min-h-screen py-20">
-                <h2 class="text-4xl font-bold text-white mb-4">Core Expertise</h2>
+                 <h2 class="text-4xl font-bold text-white mb-4">Core Expertise</h2>
                 <p class="text-lg text-gray-400 mb-12 max-w-3xl">A quantitative and qualitative view of my technical capabilities across key domains.</p>
-
-                <!-- Experience Chart -->
                 <div class="mb-12 bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg">
                     <div class="chart-container">
                         <canvas id="experienceChart"></canvas>
                     </div>
                 </div>
-
-                <!-- Skills Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
                         <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
@@ -343,7 +332,7 @@
                             <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Automation (UFT, Selenium)</span>
                             <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">API & Stress Testing</span>
                             <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Test Strategy</span>
-                           
+                            
                         </div>
                     </div>
                     <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
@@ -388,7 +377,6 @@
                 </div>
             </section>
 
-            <!-- Certifications Section -->
             <section id="certs" class="min-h-screen py-20">
                 <h2 class="text-4xl font-bold text-white mb-4">Certifications</h2>
                 <p class="text-lg text-gray-400 mb-12 max-w-3xl">Industry-recognized certifications validating expertise in Scrum, Blockchain, Leadership, and Automation.</p>
@@ -432,7 +420,6 @@
                 </div>
             </section>
 
-            <!-- About Section -->
             <section id="about" class="min-h-screen py-20">
                 <h2 class="text-4xl font-bold text-white mb-4">The Architect & The Monk-ey</h2>
                 <p class="text-lg text-gray-400 mb-12 max-w-3xl">Understanding the person behind the professional - my philosophy bridges technical precision with purpose-driven execution.</p>
@@ -509,7 +496,6 @@
         </main>
     </div>
 
-    <!-- Sticky CTA Footer -->
     <div class="sticky-cta" id="stickyCta">
         <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="text-center sm:text-left">
@@ -532,12 +518,10 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Hide loader after page loads
         setTimeout(() => {
             document.getElementById('loader').classList.add('hidden');
         }, 800);
 
-        // Animate stat counters
         function animateCounter(element) {
             const target = parseInt(element.dataset.target);
             const duration = 2000;
@@ -555,98 +539,42 @@
             }, 16);
         }
 
-        // Trigger counter animation when hero section is visible
-        const observer = new IntersectionObserver((entries) => {
+        const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     document.querySelectorAll('.stat-number').forEach(animateCounter);
-                    observer.disconnect();
+                    counterObserver.disconnect();
                 }
             });
         }, { threshold: 0.5 });
         
-        observer.observe(document.getElementById('home'));
+        counterObserver.observe(document.getElementById('home'));
 
-        // Journey data
         const journeyData = [
-            {
-                role: "Product Lead",
-                company: "Saptharushi (Formerly Aqilliz) Pte Ltd",
-                period: "Apr 2024 - Present",
-                details: [
-                    "Leading product strategy and roadmap for Web3 advertising solutions",
-                    "Managing cross-functional teams across engineering, design, and business",
-                    "Merged with parent company TreasurePACK for administrative efficiency",
-                    "Driving go-to-market initiatives and client engagement strategies"
-                ]
-            },
-            {
-                role: "Product & QA Lead",
-                company: "TreasurePACK DMCC",
-                period: "Apr 2023 - Mar 2024",
-                details: [
-                    "Managed tech team of 8 engineers, establishing release processes and test strategies",
-                    "Developed Go-To-Market strategy and led product listing on Google Marketplace",
-                    "Maintained Product Backlog and served as interface between Business and Tech teams",
-                    "Conducted client demos and created comprehensive product documentation",
-                    "Reduced project overheads by 30% through streamlined QA processes"
-                ]
-            },
-            {
-                role: "QA Lead",
-                company: "KoineArth India Pvt Ltd",
-                period: "Dec 2021 - Mar 2023",
-                details: [
-                    "Built and led QA team from ground up, establishing test frameworks and methodologies",
-                    "Reported directly to CPO, gaining extensive Product Management exposure",
-                    "Architected testing strategy for NFT marketplace on Polygon Matic blockchain",
-                    "Developed QA framework for Supply Chain application on Hyperledger Fabric",
-                    "Implemented stress testing using JMeter and k6, identifying performance bottlenecks",
-                    "Created Selenium automation framework, reducing regression testing time by 60%"
-                ]
-            },
-            {
-                role: "Senior Project Engineer",
-                company: "Wipro Ltd",
-                period: "Dec 2015 - Dec 2021",
-                details: [
-                    "Led functional automation team writing comprehensive test scripts",
-                    "Analyzed business requirements for Investment Banking Market Risk domain",
-                    "Created functional flows and test plans for System Integration Testing (SIT)",
-                    "Supported Team Lead in test planning, traceability matrix, and effort estimation",
-                    "Conducted manual and regression testing for critical banking applications",
-                    "Mentored junior team members on testing best practices and tools"
-                ]
-            },
-            {
-                role: "Project Engineer",
-                company: "Wipro Ltd",
-                period: "Aug 2011 - Dec 2015",
-                details: [
-                    "Started career as Software Test Engineer in Investment Banking domain",
-                    "Performed business requirement analysis, manual testing, and data validation",
-                    "Understood Trade Lifecycle and Front/Middle/Back office operations",
-                    "Previously served as Network Support Engineer handling Carriage Testing",
-                    "Conducted Network Assurance activities ensuring system reliability"
-                ]
-            }
+            { role: "Product Lead", company: "Saptharushi (Formerly Aqilliz) Pte Ltd", period: "Apr 2024 - Present", details: ["Leading product strategy and roadmap for Web3 advertising solutions", "Managing cross-functional teams across engineering, design, and business", "Merged with parent company TreasurePACK for administrative efficiency", "Driving go-to-market initiatives and client engagement strategies"] },
+            { role: "Product & QA Lead", company: "TreasurePACK DMCC", period: "Apr 2023 - Mar 2024", details: ["Managed tech team of 8 engineers, establishing release processes and test strategies", "Developed Go-To-Market strategy and led product listing on Google Marketplace", "Maintained Product Backlog and served as interface between Business and Tech teams", "Conducted client demos and created comprehensive product documentation", "Reduced project overheads by 30% through streamlined QA processes"] },
+            { role: "QA Lead", company: "KoineArth India Pvt Ltd", period: "Dec 2021 - Mar 2023", details: ["Built and led QA team from ground up, establishing test frameworks and methodologies", "Reported directly to CPO, gaining extensive Product Management exposure", "Architected testing strategy for NFT marketplace on Polygon Matic blockchain", "Developed QA framework for Supply Chain application on Hyperledger Fabric", "Implemented stress testing using JMeter and k6, identifying performance bottlenecks", "Created Selenium automation framework, reducing regression testing time by 60%"] },
+            { role: "Senior Project Engineer", company: "Wipro Ltd", period: "Dec 2015 - Dec 2021", details: ["Led functional automation team writing comprehensive test scripts", "Analyzed business requirements for Investment Banking Market Risk domain", "Created functional flows and test plans for System Integration Testing (SIT)", "Supported Team Lead in test planning, traceability matrix, and effort estimation", "Conducted manual and regression testing for critical banking applications", "Mentored junior team members on testing best practices and tools"] },
+            { role: "Project Engineer", company: "Wipro Ltd", period: "Aug 2011 - Dec 2015", details: ["Started career as Software Test Engineer in Investment Banking domain", "Performed business requirement analysis, manual testing, and data validation", "Understood Trade Lifecycle and Front/Middle/Back office operations", "Previously served as Network Support Engineer handling Carriage Testing", "Conducted Network Assurance activities ensuring system reliability"] }
         ];
 
         const timelineContainer = document.getElementById('timeline-container');
-        const journeyDetailsContainer = document.getElementById('journey-details');
+        const journeyDetailsDesktopContainer = document.getElementById('journey-details-desktop');
 
         if (timelineContainer) {
             journeyData.forEach((job, index) => {
                 const item = document.createElement('div');
-                item.className = 'timeline-item relative mb-8 pl-8 pb-8 cursor-pointer';
+                item.className = 'timeline-item relative pl-8 pb-4 cursor-pointer';
                 item.dataset.index = index;
                 
-                const content = `
-                    <h3 class="font-bold text-lg text-white">${job.role}</h3>
-                    <p class="text-md text-gray-400">${job.company}</p>
-                    <p class="text-sm text-gray-500">${job.period}</p>
+                item.innerHTML = `
+                    <div class="relative pt-3 pb-3">
+                        <h3 class="font-bold text-lg text-white">${job.role}</h3>
+                        <p class="text-md text-gray-400">${job.company}</p>
+                        <p class="text-sm text-gray-500">${job.period}</p>
+                    </div>
+                    <div class="mobile-details-container md:hidden bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg"></div>
                 `;
-                item.innerHTML = content;
                 timelineContainer.appendChild(item);
             });
 
@@ -654,7 +582,7 @@
 
             function updateDetails(index) {
                 const job = journeyData[index];
-                const detailsContent = `
+                const detailsContentHTML = `
                     <h3 class="font-bold text-2xl text-white mb-2">${job.role}</h3>
                     <p class="text-lg text-gray-400 mb-1">${job.company}</p>
                     <p class="text-sm text-gray-500 mb-4">${job.period}</p>
@@ -662,10 +590,26 @@
                         ${job.details.map(d => `<li>${d}</li>`).join('')}
                     </ul>
                 `;
-                journeyDetailsContainer.innerHTML = detailsContent;
+                
+                if (journeyDetailsDesktopContainer) {
+                    journeyDetailsDesktopContainer.innerHTML = detailsContentHTML;
+                }
+
+                const targetMobileContainer = timelineItems[index].querySelector('.mobile-details-container');
+                const isAlreadyOpen = targetMobileContainer.classList.contains('open');
+
+                document.querySelectorAll('.mobile-details-container').forEach(container => {
+                    container.classList.remove('open');
+                    container.innerHTML = ''; 
+                });
                 
                 timelineItems.forEach(item => item.classList.remove('active'));
-                timelineItems[index].classList.add('active');
+
+                if (!isAlreadyOpen) {
+                    targetMobileContainer.innerHTML = detailsContentHTML;
+                    targetMobileContainer.classList.add('open');
+                    timelineItems[index].classList.add('active');
+                }
             }
 
             timelineContainer.addEventListener('click', (e) => {
@@ -676,7 +620,22 @@
                 }
             });
 
-            updateDetails(0);
+            if (window.innerWidth >= 768) {
+                updateDetails(0); 
+            } else {
+                 timelineItems[0].classList.add('active');
+                 const firstMobileContainer = timelineItems[0].querySelector('.mobile-details-container');
+                 const job = journeyData[0];
+                 firstMobileContainer.innerHTML = `
+                    <h3 class="font-bold text-2xl text-white mb-2">${job.role}</h3>
+                    <p class="text-lg text-gray-400 mb-1">${job.company}</p>
+                    <p class="text-sm text-gray-500 mb-4">${job.period}</p>
+                    <ul class="space-y-2 list-disc pl-5 text-gray-300">
+                        ${job.details.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                `;
+                firstMobileContainer.classList.add('open');
+            }
         }
 
         const sections = document.querySelectorAll('main section');
@@ -827,7 +786,6 @@
             });
         });
 
-        // Starfield Animation
         const canvas = document.getElementById('starfield');
         const starCtx = canvas.getContext('2d');
         
@@ -906,3 +864,4 @@
     </script>
 </body>
 </html>
+

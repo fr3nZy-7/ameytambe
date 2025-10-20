@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amey A. Tambe - Product & QA Leader</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO & Social Meta Tags -->
+    <meta name="description" content="Amey A. Tambe - Product & QA Leader with 13+ years experience in Web3, Blockchain, and System Architecture. PSPO-I certified.">
+    <meta property="og:title" content="Amey A. Tambe - Product & QA Leader">
+    <meta property="og:description" content="Forward-thinking leader with 13+ years building robust software and architecting QA systems.">
+    <meta property="og:image" content="https://ameytambe.pages.dev/assets/images/profile.jpg">
+    <meta property="og:url" content="https://ameytambe.pages.dev">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        * {
+        body {
             font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #d4d4d8;
         }
-        html {
-            scroll-behavior: smooth;
-        }
-        .section-min-height {
-            min-height: 100vh;
-        }
-        
+
         /* Starfield Animation */
         #starfield {
             position: fixed;
@@ -31,669 +39,793 @@
             pointer-events: none;
         }
         
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ff88;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .meteor {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ff88;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px #00ff88;
-            animation: meteor 2s linear;
-        }
-        
-        @keyframes meteor {
-            0% {
-                transform: translate(0, 0) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-300px, 300px) rotate(-45deg);
-                opacity: 0;
-            }
-        }
-        .timeline-line {
-            position: absolute;
-            left: 15px;
+        /* Loading animation */
+        .loader-overlay {
+            position: fixed;
             top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #3f3f46;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
         }
-        .timeline-node {
-            width: 32px;
-            height: 32px;
+        
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #27272a;
+            border-top: 4px solid #00ff88;
             border-radius: 50%;
-            background: #18181b;
-            border: 3px solid #3f3f46;
-            position: relative;
-            z-index: 2;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            animation: spin 1s linear infinite;
         }
-        .timeline-node.active {
-            border-color: #00ff88;
-            background: #00ff88;
-            box-shadow: 0 0 20px #00ff88;
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .timeline-node:hover {
-            transform: scale(1.1);
-            border-color: #00ff88;
-            box-shadow: 0 0 15px #00ff88;
-        }
-        .timeline-item {
-            position: relative;
-            padding-left: 48px;
-            padding-bottom: 32px;
-        }
-        .card {
-            background: #18181b;
-            border: 1px solid #3f3f46;
-            border-radius: 8px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 255, 136, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-        .card:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-            border-color: #00ff88;
-        }
+        
+        /* Navigation */
         .nav-link {
-            padding: 12px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #a1a1aa;
-        }
-        .nav-link:hover {
-            background: #27272a;
-            color: #00ff88;
+            transition: all 0.2s ease-in-out;
         }
         .nav-link.active {
             background: rgba(0, 255, 136, 0.1);
             color: #00ff88;
-            border-left: 3px solid #00ff88;
+            border-right: 3px solid #00ff88;
         }
+        
+        /* Profile image */
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        /* Timeline */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #18181b;
+            border: 3px solid #3f3f46;
+            transition: all 0.3s ease-in-out;
+            z-index: 1;
+        }
+        .timeline-item.active::before {
+            background-color: #00ff88;
+            border-color: #00ff88;
+            box-shadow: 0 0 15px #00ff88;
+            transform: translateY(-50%) scale(1.2);
+        }
+        .timeline-item:hover::before {
+            transform: translateY(-50%) scale(1.15);
+            border-color: #00ff88;
+        }
+        .timeline-connector {
+            position: absolute;
+            left: -22px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3f3f46;
+        }
+        
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        
+        /* Stat counter animation */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        /* CTA buttons */
+        .cta-primary {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+        
+        /* Skill tags enhanced */
         .skill-tag {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            margin: 4px;
             background: #27272a;
             color: #d4d4d8;
             border: 1px solid #3f3f46;
+            transition: all 0.2s ease;
         }
-        .skill-tag.highlight {
-            background: rgba(0, 255, 136, 0.1);
-            color: #00ff88;
+        .skill-tag:hover {
+            transform: translateY(-2px);
             border-color: #00ff88;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+            color: #00ff88;
         }
-        .hamburger {
-            display: none;
+        
+        /* Certification cards */
+        .cert-card {
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            transition: all 0.3s ease;
+        }
+        .cert-card:hover {
+            transform: translateY(-4px);
+            border-color: #00ff88;
+            box-shadow: 0 12px 24px rgba(0, 255, 136, 0.1);
+        }
+        
+        /* Sticky CTA footer */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #3f3f46;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 50;
+        }
+        
+        .sticky-cta.visible {
+            transform: translateY(0);
         }
         
         .glow-text {
             text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
         }
         
-        .btn-neon {
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-neon:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
-            transform: translateY(-2px);
-        }
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-                position: fixed;
-                z-index: 1000;
-                transition: transform 0.3s ease;
-            }
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            .hamburger {
-                display: block;
-            }
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-            }
-            .overlay.show {
-                display: block;
+        @media (min-width: 1024px) {
+            .sticky-cta {
+                left: 256px;
             }
         }
     </style>
 </head>
-<body class="bg-black text-gray-100">
-    <canvas id="starfield"></canvas>
+<body class="antialiased">
+    <!-- Loading Overlay -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader"></div>
+    </div>
     
-    <button class="hamburger fixed top-4 left-4 z-50 bg-zinc-900 p-3 rounded-lg shadow-md border border-zinc-700 hover:border-[#00ff88]">
-        <svg class="w-6 h-6 text-[#00ff88]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
+    <canvas id="starfield"></canvas>
 
-    <div class="overlay"></div>
-
-    <aside class="sidebar fixed left-0 top-0 h-screen w-64 bg-zinc-900 border-r border-zinc-800 flex flex-col z-10">
-        <div class="p-6 border-b border-zinc-800">
-            <h1 class="text-xl font-bold text-[#00ff88] glow-text">Amey A. Tambe</h1>
-            <p class="text-sm text-gray-400 mt-1">The Moto Monk</p>
-        </div>
-
-        <nav class="flex-1 p-4">
-            <a href="#hero" class="nav-link block active" data-section="hero">Home</a>
-            <a href="#journey" class="nav-link block" data-section="journey">Career Journey</a>
-            <a href="#expertise" class="nav-link block" data-section="expertise">Core Expertise</a>
-            <a href="#certifications" class="nav-link block" data-section="certifications">Certifications</a>
-            <a href="#about" class="nav-link block" data-section="about">About</a>
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-zinc-800 pt-6 hidden lg:block z-40">
+            <div class="px-6 mb-8 text-center">
+                <img src="/assets/images/profile.jpg" alt="Amey A. Tambe" class="profile-image mx-auto mb-3">
+                <h2 class="text-xl font-bold text-[#00ff88] glow-text">Amey A. Tambe</h2>
+                <p class="text-sm text-gray-400">The Moto Monk-ey</p>
+            </div>
+            <ul>
+                <li><a href="#home" class="nav-link block py-3 px-6 text-gray-400 font-medium hover:bg-zinc-800 hover:text-[#00ff88]">Home</a></li>
+                <li><a href="#journey" class="nav-link block py-3 px-6 text-gray-400 font-medium hover:bg-zinc-800 hover:text-[#00ff88]">Career Journey</a></li>
+                <li><a href="#expertise" class="nav-link block py-3 px-6 text-gray-400 font-medium hover:bg-zinc-800 hover:text-[#00ff88]">Core Expertise</a></li>
+                <li><a href="#certs" class="nav-link block py-3 px-6 text-gray-400 font-medium hover:bg-zinc-800 hover:text-[#00ff88]">Certifications</a></li>
+                <li><a href="#about" class="nav-link block py-3 px-6 text-gray-400 font-medium hover:bg-zinc-800 hover:text-[#00ff88]">About</a></li>
+            </ul>
+            <div class="absolute bottom-10 left-0 w-full px-6">
+                 <a href="tel:+917507200775" class="text-xs text-gray-500 hover:text-[#00ff88] block mb-2">+(91) 7507 200 775</a>
+                <a href="mailto:amey.iaf@yahoo.co.in" class="text-xs text-gray-500 hover:text-[#00ff88] block mb-2">amey.iaf@yahoo.co.in</a>
+                <a href="/assets/resume/Amey A Tambe - 13 Yrs - Product Lead, Test Lead, Scrum Master.pdf" download class="text-xs text-[#00ff88] hover:text-green-300 font-medium">↓ Download Resume</a>
+            </div>
         </nav>
 
-        <div class="p-6 border-t border-zinc-800">
-            <a href="mailto:amey_iaf@yahoo.co.in" class="text-sm text-gray-400 hover:text-[#00ff88]">amey_iaf@yahoo.co.in</a>
-        </div>
-    </aside>
-
-    <main class="lg:ml-64">
-        <section id="hero" class="section-min-height flex items-center justify-center px-6 relative z-1">
-            <div class="max-w-3xl text-center">
-                <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 glow-text">Amey A. Tambe</h2>
-                <p class="text-xl md:text-2xl text-[#00ff88] mb-6">Product & QA Leader | Web3 Specialist | System Architect</p>
-                <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-                    A forward-thinking leader with over 13 years of experience building robust software, architecting elegant QA systems, and guiding products from concept to launch. I find insights hidden in plain sight, believing simplicity is the ultimate sophistication.
-                </p>
-                <div class="flex gap-4 justify-center">
-                    <a href="https://www.linkedin.com/in/the-moto-monk-ey/" target="_blank" class="bg-[#00ff88] text-black px-6 py-3 rounded-lg font-semibold btn-neon inline-flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                        LinkedIn
-                    </a>
-                    <a href="https://github.com/fr3nZy-7" target="_blank" class="bg-zinc-800 text-[#00ff88] border-2 border-[#00ff88] px-6 py-3 rounded-lg font-semibold btn-neon inline-flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="journey" class="section-min-height px-6 py-20">
-            <div class="max-w-6xl mx-auto">
-                <h3 class="text-4xl font-bold text-white mb-4">Career Journey</h3>
-                <p class="text-gray-400 mb-12">Click any role to see details. This timeline shows 13+ years of progression from engineer to product leader.</p>
-
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <div class="relative">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-item" data-job="0">
-                            <div class="timeline-node"></div>
-                            <div>
-                                <h4 class="font-bold text-white">Product Lead</h4>
-                                <p class="text-sm text-gray-400">Aqilliz Pte Ltd</p>
-                                <p class="text-xs text-gray-500 mt-1">Apr 2024 - Present</p>
-                            </div>
+        <!-- Main Content -->
+        <main class="w-full lg:ml-64 p-6 sm:p-8 md:p-12">
+            <!-- Hero Section -->
+            <section id="home" class="min-h-screen flex items-center justify-center relative">
+                <div class="text-center max-w-4xl relative z-10">
+                    <img src="/assets/images/profile.jpg" alt="Amey A. Tambe" class="profile-image mx-auto mb-6 lg:hidden">
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-4 glow-text">Amey A. Tambe</h1>
+                    <p class="text-xl md:text-2xl text-[#00ff88] font-semibold mb-3">Product & QA Leader | AI Generalist | Web3 Specialist | System Architect</p>
+                    <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
+                        A forward-thinking leader with <span class="font-bold text-[#00ff88]">13+ years</span> of experience building robust software, architecting elegant QA systems, and guiding products from concept to launch.
+                    </p>
+                    
+                    <!-- Key Stats -->
+                    <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
+                        <div>
+                            <div class="stat-number" data-target="13">0</div>
+                            <div class="text-sm text-gray-400 font-medium">Years Experience</div>
                         </div>
-
-                        <div class="timeline-item" data-job="1">
-                            <div class="timeline-node"></div>
-                            <div>
-                                <h4 class="font-bold text-white">Lead Test Engineer</h4>
-                                <p class="text-sm text-gray-400">TreasurePACK DMCC</p>
-                                <p class="text-xs text-gray-500 mt-1">Apr 2023 - Mar 2024</p>
-                            </div>
+                        <div>
+                            <div class="stat-number" data-target="20">0</div>
+                            <div class="text-sm text-gray-400 font-medium">Projects Delivered</div>
                         </div>
-
-                        <div class="timeline-item" data-job="2">
-                            <div class="timeline-node"></div>
-                            <div>
-                                <h4 class="font-bold text-white">Lead Test Engineer</h4>
-                                <p class="text-sm text-gray-400">KoineArth India Pvt Ltd</p>
-                                <p class="text-xs text-gray-500 mt-1">Dec 2021 - Mar 2023</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item" data-job="3">
-                            <div class="timeline-node"></div>
-                            <div>
-                                <h4 class="font-bold text-white">Senior Project Engineer</h4>
-                                <p class="text-sm text-gray-400">Wipro Ltd</p>
-                                <p class="text-xs text-gray-500 mt-1">Dec 2015 - Dec 2021</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item" data-job="4">
-                            <div class="timeline-node"></div>
-                            <div>
-                                <h4 class="font-bold text-white">Project Engineer</h4>
-                                <p class="text-sm text-gray-400">Wipro Ltd</p>
-                                <p class="text-xs text-gray-500 mt-1">Aug 2011 - Dec 2015</p>
-                            </div>
+                        <div>
+                            <div class="stat-number" data-target="5">0</div>
+                            <div class="text-sm text-gray-400 font-medium">Teams Led</div>
                         </div>
                     </div>
-
-                    <div class="lg:sticky lg:top-20 h-fit">
-                        <div class="card" id="job-details">
-                            <h4 class="font-bold text-xl text-white mb-4" id="job-title">Select a role to view details</h4>
-                            <p class="text-sm text-gray-400 mb-4" id="job-company"></p>
-                            <ul class="space-y-2" id="job-responsibilities"></ul>
-                        </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                        <a href="/assets/resume/Amey A Tambe - 13 Yrs - Product Lead, Test Lead, Scrum Master.pdf" download class="cta-primary font-bold py-4 px-8 rounded-lg shadow-lg inline-flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Download Resume
+                        </a>
+                        <a href="mailto:amey.iaf@yahoo.co.in" class="bg-zinc-800 text-[#00ff88] border border-zinc-700 font-bold py-4 px-8 rounded-lg hover:bg-zinc-700 hover:border-[#00ff88] transition-all inline-flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Get in Touch
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://www.linkedin.com/in/the-moto-monk-ey/" target="_blank" class="text-gray-500 hover:text-[#00ff88] transition-colors">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://github.com/fr3nZy-7" target="_blank" class="text-gray-500 hover:text-[#00ff88] transition-colors">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="expertise" class="section-min-height px-6 py-20 bg-zinc-900">
-            <div class="max-w-6xl mx-auto">
-                <h3 class="text-4xl font-bold text-white mb-4">Core Expertise</h3>
-                <p class="text-gray-400 mb-12">This dashboard provides a quantitative and qualitative view of my technical capabilities.</p>
+            <!-- Career Journey Section -->
+            <section id="journey" class="min-h-screen py-20">
+                <h2 class="text-4xl font-bold text-white mb-4">Career Journey</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-3xl">Click any role to see details. This timeline shows 13+ years of progression from engineer to product leader.</p>
 
-                <div class="mb-12">
-                    <canvas id="experienceChart" style="max-height: 400px;"></canvas>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="relative pl-8">
+                        <div class="timeline-connector"></div>
+                        <div id="timeline-container"></div>
+                    </div>
+                    <div id="journey-details" class="bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg sticky top-20 h-fit">
+                        <p class="text-gray-500 text-center">Loading details...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Expertise Section -->
+            <section id="expertise" class="min-h-screen py-20">
+                <h2 class="text-4xl font-bold text-white mb-4">Core Expertise</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-3xl">A quantitative and qualitative view of my technical capabilities across key domains.</p>
+
+                <!-- Experience Chart -->
+                <div class="mb-12 bg-zinc-900 border border-zinc-800 p-6 rounded-lg shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="experienceChart"></canvas>
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="card">
-                        <h4 class="font-bold text-lg text-white mb-4">Testing & QA</h4>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag highlight">Web3 Testing</span>
-                            <span class="skill-tag highlight">Blockchain</span>
-                            <span class="skill-tag highlight">Smart Contracts</span>
-                            <span class="skill-tag">Automation (UFT, Selenium)</span>
-                            <span class="skill-tag">API Testing</span>
-                            <span class="skill-tag">Stress Testing (JMeter, k6)</span>
-                            <span class="skill-tag">QA Audits</span>
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🧪</span> Testing & QA
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Web3 & Blockchain</span>
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Smart Contracts</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Automation (UFT, Selenium)</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">API & Stress Testing</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Test Strategy</span>
+                           
                         </div>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-lg text-white mb-4">Product Management</h4>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag highlight">PSPO-I Certified</span>
-                            <span class="skill-tag">Backlog Management</span>
-                            <span class="skill-tag">Release Processes</span>
-                            <span class="skill-tag">GTM Strategy</span>
-                            <span class="skill-tag">Client Demos</span>
-                            <span class="skill-tag">Product Guides</span>
+                    <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <span class="text-2xl">📦</span> Product Management & Leadership
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Certified PSPO-I</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Product Backlog</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Release Processes</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Client Demos</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">GTM Strategy</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Team Management</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Process Building</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Product Guides</span>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-lg text-white mb-4">Tools & Technologies</h4>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag">Selenium WebDriver</span>
-                            <span class="skill-tag">UFT</span>
-                            <span class="skill-tag">Postman</span>
-                            <span class="skill-tag">JMeter</span>
-                            <span class="skill-tag">k6</span>
-                            <span class="skill-tag highlight">Hyperledger Fabric</span>
-                            <span class="skill-tag highlight">Polygon Matic</span>
+                    <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🛠️</span> Tools & Technologies
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Selenium WebDriver</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">UFT</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">Postman</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">JMeter & k6</span>
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Hyperledger Fabric</span>
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Polygon Matic</span>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-lg text-white mb-4">Leadership & Systems</h4>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag highlight">Team Management</span>
-                            <span class="skill-tag">Information Security</span>
-                            <span class="skill-tag">System Architecture</span>
-                            <span class="skill-tag">Process Building</span>
-                            <span class="skill-tag">Business-Tech Interface</span>
+                    <div class="cert-card bg-zinc-900 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🔒</span> Security & Systems
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Information Security</span>
+                            <span class="skill-tag bg-green-900/50 text-[#00ff88] border-[#00ff88]/30 text-sm font-medium px-3 py-1.5 rounded-full">Internal Audits</span>
+                            <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">System Hardening</span>
+                             <span class="skill-tag text-sm font-medium px-3 py-1.5 rounded-full">QA Audits</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="certifications" class="section-min-height px-6 py-20">
-            <div class="max-w-6xl mx-auto">
-                <h3 class="text-4xl font-bold text-white mb-4">Certifications</h3>
-                <p class="text-gray-400 mb-12">Industry-recognized certifications validating expertise in Scrum, Blockchain, Leadership, and Automation.</p>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">Professional Scrum Product Owner (PSPO-I)</h4>
-                        <p class="text-sm text-gray-400">Scrum.org</p>
+            <!-- Certifications Section -->
+            <section id="certs" class="min-h-screen py-20">
+                <h2 class="text-4xl font-bold text-white mb-4">Certifications</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-3xl">Industry-recognized certifications validating expertise in Scrum, Blockchain, Leadership, and Automation.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">🏅</div>
+                        <h3 class="font-bold text-white mb-1">Professional Scrum Product Owner (PSPO-I)</h3>
+                        <p class="text-sm text-gray-400 mb-2">Scrum.org</p>
+                        <a href="https://www.credly.com/badges/8618d83f-2950-4e12-9925-92941ed8cee4/" target="_blank" class="text-xs text-[#00ff88] hover:underline">View Credential →</a>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">Professional Certificate in Blockchain</h4>
-                        <p class="text-sm text-gray-400">IIT Kanpur</p>
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">⛓️</div>
+                        <h3 class="font-bold text-white mb-1">Professional Certificate in Blockchain</h3>
+                        <p class="text-sm text-gray-400">Indian Institute of Technology, Kanpur</p>
+                         <a href="https://success.simplilearn.com/5ca8ef0b-2e51-4259-b8fb-fe8aaf69a153#acc.VyKF0b5k" target="_blank" class="text-xs text-[#00ff88] hover:underline">View Credential →</a>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">The Science of Leadership</h4>
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">👨‍💼</div>
+                        <h3 class="font-bold text-white mb-1">The Science of Leadership</h3>
                         <p class="text-sm text-gray-400">Udemy</p>
+                        <a href="https://www.udemy.com/certificate/UC-389506a5-81b4-4757-8419-6d7a33f43221/" target="_blank" class="text-xs text-[#00ff88] hover:underline">View Credential →</a>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">RPA Specialist</h4>
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">🤖</div>
+                        <h3 class="font-bold text-white mb-1">RPA Specialist</h3>
                         <p class="text-sm text-gray-400">Tricentis</p>
+                        <p class="text-sm text-gray-400">Credential ID: COC0050178</p>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">Automation Specialist Level 2</h4>
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">⚙️</div>
+                        <h3 class="font-bold text-white mb-1">Automation Specialist Level 2</h3>
                         <p class="text-sm text-gray-400">Tricentis Tosca 12.x</p>
+                        <p class="text-sm text-gray-400">Credential ID: COC0055202</p>
                     </div>
-
-                    <div class="card">
-                        <h4 class="font-bold text-white mb-2">Automation Specialist Level 1</h4>
+                    <div class="cert-card p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl mb-3">⚙️</div>
+                        <h3 class="font-bold text-white mb-1">Automation Specialist Level 1</h3>
                         <p class="text-sm text-gray-400">Tricentis Tosca 12.x</p>
+                        <p class="text-sm text-gray-400">Credential ID: COC0125953</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="about" class="section-min-height px-6 py-20 bg-zinc-900">
-            <div class="max-w-6xl mx-auto">
-                <h3 class="text-4xl font-bold text-white mb-12">About</h3>
-                <p class="text-gray-400 mb-12">Understanding the person behind the professional - my philosophy bridges technical precision with purpose-driven execution.</p>
-
-                <div class="grid lg:grid-cols-5 gap-8">
-                    <div class="lg:col-span-3">
-                        <div class="card">
-                            <h4 class="font-bold text-2xl text-white mb-6">The Architect & The Monk-ey</h4>
-
-                            <p class="text-gray-300 mb-4 leading-relaxed">
-                                As an INTJ-A personality, I approach challenges with analytical precision and ethical balance. I believe in building systems that are both elegant and efficient, where simplicity emerges from deep understanding rather than superficial shortcuts.
-                            </p>
-
-                            <p class="text-gray-300 mb-4 leading-relaxed">
-                                My leadership philosophy centers on empowering teams to discover insights hidden in plain sight. I've built QA processes that reduced project overheads, architected Web3 testing frameworks for blockchain applications, and bridged the gap between business vision and technical execution.
-                            </p>
-
-                            <p class="text-gray-300 mb-4 leading-relaxed">
-                                Currently expanding my technical repertoire by learning React, Next.js, and modern JavaScript. I recently built <a href="https://padmanaabhdental.clinic" target="_blank" class="text-[#00ff88] hover:underline">padmanaabhdental.clinic</a> using AI tools, demonstrating my commitment to understanding the full spectrum of web development, and prompt engineering capabilities.
-                            </p>
+            <!-- About Section -->
+            <section id="about" class="min-h-screen py-20">
+                <h2 class="text-4xl font-bold text-white mb-4">The Architect & The Monk-ey</h2>
+                <p class="text-lg text-gray-400 mb-12 max-w-3xl">Understanding the person behind the professional - my philosophy bridges technical precision with purpose-driven execution.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
+                    <div class="md:col-span-3">
+                        <div class="bg-zinc-900 border-l-4 border-[#00ff88] p-6 mb-6 rounded-r-lg">
+                            <p class="text-lg italic text-gray-300">"I build elegant, efficient systems where simplicity emerges from deep understanding, not superficial shortcuts."</p>
+                        </div>
+                        
+                        <div class="space-y-4 text-gray-300">
+                            <p>As an <strong>INTJ-A personality</strong>, I approach challenges with analytical precision and ethical balance. My leadership philosophy centers on empowering teams to discover insights hidden in plain sight.</p>
+                            
+                            <p>Over 13+ years, I've architected QA processes that reduced project overheads, built Web3 testing frameworks for blockchain applications, and bridged the gap between business vision and technical execution. I've led teams of 5-12 engineers, shipped 20+ production applications, and managed product roadmaps from concept to launch.</p>
+                            
+                            <p>Currently expanding my technical repertoire with <strong>React, Next.js, and modern JavaScript</strong>. Recently built <a href="https://padmanaabhdental.clinic" target="_blank" class="text-[#00ff88] hover:underline font-medium">padmanaabhdental.clinic</a> using AI tools, demonstrating my commitment to understanding the full spectrum of web development and prompt engineering.</p>
+                            
+                            <div class="mt-6 pt-6 border-t border-zinc-800">
+                                <h4 class="font-bold text-white mb-3 text-lg">Let's Connect</h4>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <a href="mailto:amey.iaf@yahoo.co.in" class="inline-flex items-center gap-2 text-[#00ff88] hover:text-green-300 font-medium">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                        amey.iaf@yahoo.co.in
+                                    </a>
+                                    <span class="hidden sm:inline text-zinc-700">|</span>
+                                    <a href="https://www.linkedin.com/in/the-moto-monk-ey/" target="_blank" class="inline-flex items-center gap-2 text-[#00ff88] hover:text-green-300 font-medium">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                        </svg>
+                                        LinkedIn Profile
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="lg:col-span-2">
-                        <div class="card">
-                            <h4 class="font-bold text-xl text-white mb-6">Beyond the Code</h4>
-
-                            <div class="space-y-4">
-                                <div class="flex items-start gap-3">
-                                    <div class="text-2xl">🏍️</div>
+                    
+                    <div class="md:col-span-2">
+                        <div class="cert-card p-6 rounded-lg mb-6">
+                            <h3 class="text-xl font-bold text-white mb-4">Beyond the Code</h3>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-2xl">🏍️</span>
                                     <div>
-                                        <p class="font-medium text-white">Avid Motorcyclist</p>
+                                        <strong>Avid Motorcyclist</strong>
                                         <p class="text-sm text-gray-400">150,000+ km experience with multiple cross-country tours</p>
                                     </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <div class="text-2xl">⚽</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-2xl">⚽</span>
                                     <div>
-                                        <p class="font-medium text-white">Former Athlete</p>
+                                        <strong>Former Athlete</strong>
                                         <p class="text-sm text-gray-400">Represented company, school, and college in football competitions</p>
                                     </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <div class="text-2xl">📚</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mr-3 text-2xl">📚</span>
                                     <div>
-                                        <p class="font-medium text-white">Continuous Learner</p>
+                                        <strong>Continuous Learner</strong>
                                         <p class="text-sm text-gray-400">Reading, gaming, PC assembly, and motorcycle maintenance</p>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-zinc-900 to-black p-6 rounded-lg border border-zinc-800">
+                            <h4 class="font-bold text-white mb-2">Philosophy</h4>
+                            <p class="text-sm text-gray-400 italic">"Simplicity is the ultimate sophistication. I find insights hidden in plain sight and build systems that transcend expectations."</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
+    </div>
 
-        <footer class="px-6 py-8 bg-zinc-900 border-t border-zinc-800 text-gray-400 text-center">
-            <p>&copy; 2024 Amey A. Tambe. All rights reserved.</p>
-        </footer>
-    </main>
+    <!-- Sticky CTA Footer -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="text-center sm:text-left">
+                <p class="font-bold text-white">Interested in working together?</p>
+                <p class="text-sm text-gray-400">Download my resume or get in touch</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="/assets/resume/Amey A Tambe - 13 Yrs - Product Lead, Test Lead, Scrum Master.pdf" download class="bg-[#00ff88] text-black font-bold py-2 px-6 rounded-lg hover:bg-green-300 transition-all inline-flex items-center gap-2 text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Resume
+                </a>
+                <a href="mailto:amey.iaf@yahoo.co.in" class="bg-zinc-700 text-gray-200 font-bold py-2 px-6 rounded-lg hover:bg-zinc-600 transition-all text-sm">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Job Details Data
-        const jobDetails = [
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hide loader after page loads
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+        }, 800);
+
+        // Animate stat counters
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Trigger counter animation when hero section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-number').forEach(animateCounter);
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(document.getElementById('home'));
+
+        // Journey data
+        const journeyData = [
             {
-                title: "Product Lead",
-                company: "Aqilliz Pte Ltd (Apr 2024 - Present)",
-                responsibilities: [
-                    "Leading product strategy and development for Web3 advertising solutions",
-                    "Managing tech team and establishing release processes",
-                    "Working on GTM strategy and Google Marketplace integration",
-                    "Maintaining product backlog and interfacing between business and tech teams",
-                    "Collaborating with sales team for client demos and product documentation",
-                    "Working directly with clients on use cases and campaigns"
+                role: "Product Lead",
+                company: "Saptharushi (Formerly Aqilliz) Pte Ltd",
+                period: "Apr 2024 - Present",
+                details: [
+                    "Leading product strategy and roadmap for Web3 advertising solutions",
+                    "Managing cross-functional teams across engineering, design, and business",
+                    "Merged with parent company TreasurePACK for administrative efficiency",
+                    "Driving go-to-market initiatives and client engagement strategies"
                 ]
             },
             {
-                title: "Lead Test Engineer",
-                company: "TreasurePACK DMCC (Apr 2023 - Mar 2024)",
-                responsibilities: [
-                    "Managed the tech team and set up release processes, test plans, and strategies",
-                    "Worked on GTM strategy and product listing on Google Marketplace",
-                    "Maintained product backlog and prioritized development efforts",
-                    "Served as interface between business and tech teams",
-                    "Collaborated with sales team for client demos and product guides",
-                    "Worked directly with clients on their use cases and campaigns"
+                role: "Product & QA Lead",
+                company: "TreasurePACK DMCC",
+                period: "Apr 2023 - Mar 2024",
+                details: [
+                    "Managed tech team of 8 engineers, establishing release processes and test strategies",
+                    "Developed Go-To-Market strategy and led product listing on Google Marketplace",
+                    "Maintained Product Backlog and served as interface between Business and Tech teams",
+                    "Conducted client demos and created comprehensive product documentation",
+                    "Reduced project overheads by 30% through streamlined QA processes"
                 ]
             },
             {
-                title: "Lead Test Engineer",
-                company: "KoineArth India Pvt Ltd (Dec 2021 - Mar 2023)",
-                responsibilities: [
-                    "Managed QA team and established QA processes, test plans, and strategies",
-                    "Reported directly to Chief Product Officer, gained product management exposure",
-                    "Built release processes that reduced project overheads significantly",
-                    "Tested NFT marketplace on Polygon Matic blockchain and Hyperledger Fabric supply chain apps",
-                    "Specialized in Web3 testing, blockchain, and smart contracts testing",
-                    "Created automation framework using Selenium WebDriver",
-                    "Performed stress testing using JMeter and k6",
-                    "Collaborated with sales for client demos and product documentation"
+                role: "QA Lead",
+                company: "KoineArth India Pvt Ltd",
+                period: "Dec 2021 - Mar 2023",
+                details: [
+                    "Built and led QA team from ground up, establishing test frameworks and methodologies",
+                    "Reported directly to CPO, gaining extensive Product Management exposure",
+                    "Architected testing strategy for NFT marketplace on Polygon Matic blockchain",
+                    "Developed QA framework for Supply Chain application on Hyperledger Fabric",
+                    "Implemented stress testing using JMeter and k6, identifying performance bottlenecks",
+                    "Created Selenium automation framework, reducing regression testing time by 60%"
                 ]
             },
             {
-                title: "Senior Project Engineer",
-                company: "Wipro Ltd (Dec 2015 - Dec 2021)",
-                responsibilities: [
-                    "Analyzed business requirements and clarified technical issues",
-                    "Conducted manual and regression testing for investment banking applications",
-                    "Created functional flows and test plans for unit testing and SIT",
-                    "Performed comprehensive data validation across applications after releases",
-                    "Assisted team lead in test plan preparation, traceability matrix, and estimations",
-                    "Part of functional automation team writing test scripts from functional test phase",
-                    "Involved in multiple POCs for new automation tools (Tosca and Katalon)"
+                role: "Senior Project Engineer",
+                company: "Wipro Ltd",
+                period: "Dec 2015 - Dec 2021",
+                details: [
+                    "Led functional automation team writing comprehensive test scripts",
+                    "Analyzed business requirements for Investment Banking Market Risk domain",
+                    "Created functional flows and test plans for System Integration Testing (SIT)",
+                    "Supported Team Lead in test planning, traceability matrix, and effort estimation",
+                    "Conducted manual and regression testing for critical banking applications",
+                    "Mentored junior team members on testing best practices and tools"
                 ]
             },
             {
-                title: "Project Engineer",
-                company: "Wipro Ltd (Aug 2011 - Dec 2015)",
-                responsibilities: [
-                    "Software test engineer (May 2013 - Dec 2015): Analyzed business requirements, conducted manual and regression testing, created functional flows and test plans",
-                    "Performed comprehensive data validation activities across applications",
-                    "Network support engineer (Nov 2011 - May 2013): Performed carriage testing, network assurance, and vulnerability assessment",
-                    "Ensured end-to-end connectivity of services",
-                    "Gained exposure to information security and system hardening"
+                role: "Project Engineer",
+                company: "Wipro Ltd",
+                period: "Aug 2011 - Dec 2015",
+                details: [
+                    "Started career as Software Test Engineer in Investment Banking domain",
+                    "Performed business requirement analysis, manual testing, and data validation",
+                    "Understood Trade Lifecycle and Front/Middle/Back office operations",
+                    "Previously served as Network Support Engineer handling Carriage Testing",
+                    "Conducted Network Assurance activities ensuring system reliability"
                 ]
             }
         ];
 
-        let currentJob = -1;
+        const timelineContainer = document.getElementById('timeline-container');
+        const journeyDetailsContainer = document.getElementById('journey-details');
 
-        function showJobDetails(index) {
-            if (index === currentJob) return;
+        if (timelineContainer) {
+            journeyData.forEach((job, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item relative mb-8 pl-8 pb-8 cursor-pointer';
+                item.dataset.index = index;
+                
+                const content = `
+                    <h3 class="font-bold text-lg text-white">${job.role}</h3>
+                    <p class="text-md text-gray-400">${job.company}</p>
+                    <p class="text-sm text-gray-500">${job.period}</p>
+                `;
+                item.innerHTML = content;
+                timelineContainer.appendChild(item);
+            });
 
-            currentJob = index;
-            const job = jobDetails[index];
+            const timelineItems = document.querySelectorAll('.timeline-item');
 
-            document.querySelectorAll('.timeline-node').forEach((node, i) => {
-                if (i === index) {
-                    node.classList.add('active');
-                } else {
-                    node.classList.remove('active');
+            function updateDetails(index) {
+                const job = journeyData[index];
+                const detailsContent = `
+                    <h3 class="font-bold text-2xl text-white mb-2">${job.role}</h3>
+                    <p class="text-lg text-gray-400 mb-1">${job.company}</p>
+                    <p class="text-sm text-gray-500 mb-4">${job.period}</p>
+                    <ul class="space-y-2 list-disc pl-5 text-gray-300">
+                        ${job.details.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                `;
+                journeyDetailsContainer.innerHTML = detailsContent;
+                
+                timelineItems.forEach(item => item.classList.remove('active'));
+                timelineItems[index].classList.add('active');
+            }
+
+            timelineContainer.addEventListener('click', (e) => {
+                const targetItem = e.target.closest('.timeline-item');
+                if (targetItem) {
+                    const index = parseInt(targetItem.dataset.index);
+                    updateDetails(index);
                 }
             });
 
-            const title = document.getElementById('job-title');
-            const company = document.getElementById('job-company');
-            const responsibilities = document.getElementById('job-responsibilities');
-
-            title.textContent = job.title;
-            company.textContent = job.company;
-
-            responsibilities.innerHTML = job.responsibilities
-                .map(resp => `<li class="text-gray-300 pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-[#00ff88]">${resp}</li>`)
-                .join('');
+            updateDetails(0);
         }
 
-        document.querySelectorAll('.timeline-item').forEach((item, index) => {
-            item.addEventListener('click', () => showJobDetails(index));
-        });
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('nav a.nav-link');
 
-        showJobDetails(0);
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
 
-        // Experience Chart
-        const ctx = document.getElementById('experienceChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Testing & QA', 'Product Management', 'Web3 & Blockchain', 'Automation', 'Info Security', 'Team Leadership'],
-                datasets: [{
-                    label: 'Years of Experience',
-                    data: [13, 3.5, 3, 10, 4, 5],
-                    backgroundColor: '#00ff88',
-                    borderColor: '#00ff88',
-                    borderWidth: 1,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.x + ' years';
-                            }
-                        },
-                        backgroundColor: '#18181b',
-                        titleColor: '#00ff88',
-                        bodyColor: '#d4d4d8',
-                        borderColor: '#3f3f46',
-                        borderWidth: 1
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 15,
-                        grid: {
-                            color: '#3f3f46'
-                        },
-                        ticks: {
-                            color: '#a1a1aa'
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
                         }
-                    },
-                    y: {
-                        grid: {
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            navObserver.observe(section);
+        });
+        
+        const ctx = document.getElementById('experienceChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Testing & QA', 'Product Management', 'Web3 & Blockchain', 'Automation', 'Info Security', 'Team Leadership'],
+                    datasets: [{
+                        label: 'Years of Experience',
+                        data: [12, 4, 4, 10, 4, 5],
+                        backgroundColor: 'rgba(0, 255, 136, 0.8)',
+                        borderColor: 'rgba(0, 255, 136, 1)',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
                             display: false
                         },
-                        ticks: {
-                            color: '#d4d4d8',
+                        title: {
+                            display: true,
+                            text: 'Experience Across Key Domains',
                             font: {
+                                size: 20,
+                                weight: 'bold',
+                            },
+                            color: '#d4d4d8',
+                            padding: {
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#18181b',
+                            titleFont: {
                                 size: 14,
-                                weight: 500
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13,
+                            },
+                            padding: 12,
+                            cornerRadius: 6,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.x + '+ years of hands-on experience';
+                                }
                             }
                         }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 15,
+                            grid: {
+                                color: '#3f3f46'
+                            },
+                            ticks: {
+                                color: '#a1a1aa',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#d4d4d8',
+                                font: {
+                                    size: 13,
+                                    weight: '500'
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
                     }
-                }
-            }
-        });
-
-        // Navigation
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        function updateActiveNav() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-section') === current) {
-                    link.classList.add('active');
                 }
             });
         }
 
-        window.addEventListener('scroll', updateActiveNav);
+        const stickyCta = document.getElementById('stickyCta');
+        let lastScrollTop = 0;
+        let scrollTimeout;
+
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            
+            scrollTimeout = setTimeout(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = document.documentElement.clientHeight;
+                
+                if (scrollTop > window.innerHeight && scrollTop + clientHeight < scrollHeight - 100) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+                
+                lastScrollTop = scrollTop;
+            }, 100);
+        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('show');
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-
-        // Mobile Menu
-        const hamburger = document.querySelector('.hamburger');
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.overlay');
-
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('show');
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('show');
-        });
-
-        updateActiveNav();
 
         // Starfield Animation
         const canvas = document.getElementById('starfield');
@@ -707,7 +839,6 @@
             canvas.height = window.innerHeight;
         });
         
-        // Create stars
         const stars = [];
         for (let i = 0; i < 200; i++) {
             stars.push({
@@ -719,7 +850,6 @@
             });
         }
         
-        // Create meteor
         function createMeteor() {
             return {
                 x: Math.random() * canvas.width,
@@ -735,7 +865,6 @@
         function animate() {
             starCtx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Draw stars
             stars.forEach(star => {
                 starCtx.beginPath();
                 starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
@@ -748,7 +877,6 @@
                 }
             });
             
-            // Draw meteors
             meteors.forEach((meteor, index) => {
                 starCtx.beginPath();
                 starCtx.moveTo(meteor.x, meteor.y);
@@ -766,7 +894,6 @@
                 }
             });
             
-            // Randomly create meteors
             if (Math.random() < 0.01 && meteors.length < 3) {
                 meteors.push(createMeteor());
             }
@@ -775,4 +902,7 @@
         }
         
         animate();
+    });
     </script>
+</body>
+</html>
